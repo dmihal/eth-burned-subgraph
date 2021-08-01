@@ -1,22 +1,23 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Contract
+    name: ETHBurned
     network: goerli
     source:
-      address: "0x0000000000000000000000000000000000000000"
-      abi: Contract
+      address: "0x0000000000000000000000000000000000000001"
+      abi: NullABI
+      startBlock: 5062600
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.2
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-
+        - ETHBurned
       abis:
-        - name: Contract
-          file: ./abis/Contract.json
-      eventHandlers:
-
+        - name: NullABI
+          file: ./abis/NullABI.json
+      blockHandlers:
+        - handler: handleBlock
       file: ./src/mapping.ts

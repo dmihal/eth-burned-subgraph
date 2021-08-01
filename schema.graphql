@@ -1,5 +1,4 @@
-type ExampleEntity @entity {
+type ETHBurned @entity {
   id: ID!
-  block: Bytes!
-  transaction: Bytes!
+  burned: BigDecimal!
 }
