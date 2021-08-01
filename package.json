@@ -1,0 +1,16 @@
+{
+  "name": "eth-burned",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ dmihal/eth-burned",
+    "create-local": "graph create --node http://localhost:8020/ dmihal/eth-burned",
+    "remove-local": "graph remove --node http://localhost:8020/ dmihal/eth-burned",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 dmihal/eth-burned"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.21.0",
+    "@graphprotocol/graph-ts": "0.20.0"
+  }
+}
