@@ -1,4 +1,5 @@
 type ETHBurned @entity {
   id: ID!
   burned: BigDecimal!
+  burnedUSD: BigDecimal!
 }
