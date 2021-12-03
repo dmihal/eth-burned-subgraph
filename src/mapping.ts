@@ -18,7 +18,7 @@ export function handleBlock(block: ethereum.Block): void {
     entity.burnedUSD = BigInt.fromI32(0).toBigDecimal()
   }
 
-  if (block.baseFeePerGas != null) {
+  if (block.baseFeePerGas > BigInt.fromI32(0)) {
     let baseFee = block.baseFeePerGas as BigInt
     let burned = (block.gasUsed.times(baseFee)).divDecimal(EIGHTEEN_DECIMALS)
     entity.burned += burned
