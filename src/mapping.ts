@@ -1,4 +1,4 @@
-import { Address, BigInt, BigDecimal, Bytes, ethereum } from "@graphprotocol/graph-ts"
+import { Address, BigInt, BigDecimal, ethereum } from "@graphprotocol/graph-ts"
 import { ETHBurned } from "../generated/schema"
 import { Chainlink } from "../generated/ETHBurned/Chainlink"
 
@@ -21,8 +21,14 @@ export function handleBlock(block: ethereum.Block): void {
   if (block.baseFeePerGas > BigInt.fromI32(0)) {
     let baseFee = block.baseFeePerGas as BigInt
     let burned = (block.gasUsed.times(baseFee)).divDecimal(EIGHTEEN_DECIMALS)
+
+    // There's a weird bug on block 14001535, where the USD price is massive, so we'll hardcode it
+    let ethPrice = block.number.toI32() === 14001535
+      ? BigDecimal.fromString("3282.81450911")
+      : getETHPrice()
+
     entity.burned += burned
-    entity.burnedUSD += burned * getETHPrice()
+    entity.burnedUSD += burned * ethPrice
 
     entity.save();
   }
