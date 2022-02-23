@@ -16,6 +16,7 @@ export function handleBlock(block: ethereum.Block): void {
     entity = new ETHBurned('1')
     entity.burned = BigInt.fromI32(0).toBigDecimal()
     entity.burnedUSD = BigInt.fromI32(0).toBigDecimal()
+    entity.gasUsed = BigInt.fromI32(0)
   }
 
   if (block.baseFeePerGas > BigInt.fromI32(0)) {
@@ -30,6 +31,7 @@ export function handleBlock(block: ethereum.Block): void {
 
     entity.burned += burned
     entity.burnedUSD += burned * ethPrice
+    entity.gasUsed += block.gasUsed
 
     entity.save();
   }
